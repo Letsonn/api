@@ -1,3 +1,4 @@
+import auth from "@config/auth";
 import AppError from "@shared/errors/AppError";
 import { compare } from "bcryptjs";
 import { sign } from "jsonwebtoken";
@@ -12,7 +13,6 @@ interface IRequest {
 
 interface IResponse {
   user: User;
-  token: string;
 }
 
 class CreateSessionsService {
@@ -30,17 +30,17 @@ class CreateSessionsService {
       throw new AppError('Incorrect email/password combination', 401);
     }
 
-    const token = sign({}, '1980079f11a39b8c53aba66e1d607388', {
+    const token = sign({}, `${auth.jwt.secret}`, {
       subject: user.id,
-      expiresIn: '1d',
+      expiresIn: `${auth.jwt.expiresIn}`,
     });
 
     //Criar método para adicionar o token na tabela de usuários
+    user.authenticationToken = token;
 
-    return {
-      user,
-      token
-    }
+    await userRepository.save(user);
+
+    return { user }
   }
 }
 
