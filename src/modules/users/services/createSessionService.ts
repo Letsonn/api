@@ -30,12 +30,18 @@ class CreateSessionsService {
       throw new AppError('Incorrect email/password combination', 401);
     }
 
-    const token = sign({}, `${auth.jwt.secret}`, {
-      subject: user.id,
-      expiresIn: `${auth.jwt.expiresIn}`,
-    });
+    const token = sign(
+      {
+        id: user.id,
+        name: `${user.firstName} ${user.lastName}`,
+        email: user.email,
+      },
+      `${auth.jwt.secret}`,
+      {
+        subject: user.id,
+        expiresIn: `${auth.jwt.expiresIn}`,
+      });
 
-    //Criar método para adicionar o token na tabela de usuários
     user.authenticationToken = token;
 
     await userRepository.save(user);

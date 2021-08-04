@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import Employments from "@modules/employments/typeorm/entities/empĺoyment";
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity('users')
 class Users {
@@ -25,6 +26,9 @@ class Users {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @OneToMany(() => Employments, employments => employments.user)
+  employments: Employments[];
 }
 
 export default Users;
