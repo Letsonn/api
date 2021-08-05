@@ -1,5 +1,6 @@
+import Activities from "@modules/activities/typeorm/entities/activity";
 import Projects from "@modules/boards/typeorm/entities/board";
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity()
 class Boards {
@@ -18,6 +19,10 @@ class Boards {
   @ManyToOne(() => Projects, project => project.project)
   @JoinColumn()
   project: string
+
+  @OneToMany(() => Activities, activity => activity.board)
+  acitivities: Activities[];
+
 }
 
 export default Boards;

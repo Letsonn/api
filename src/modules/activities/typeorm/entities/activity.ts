@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import Boards from "@modules/boards/typeorm/entities/board";
+import Employments from "@modules/employments/typeorm/entities/empĺoyment";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity()
 class Activities {
@@ -11,5 +13,20 @@ class Activities {
   @Column()
   status: string;
 
+  @CreateDateColumn()
+  createdAt: Date;
 
+  @UpdateDateColumn()
+  updatedAt: Date;
+
+  @ManyToOne(() => Employments, employment => employment.acitivities)
+  @JoinColumn()
+  employment: string;
+
+  @ManyToOne(() => Boards, board => board.acitivities)
+  @JoinColumn()
+  board: string;
 }
+
+
+export default Activities;
