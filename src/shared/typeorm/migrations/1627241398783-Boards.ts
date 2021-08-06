@@ -45,7 +45,7 @@ export class Boards1627241398783 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    const table = await queryRunner.getTable('employments');
+    const table = await queryRunner.getTable('boards');
     const fkProject = table?.foreignKeys.find(fk => fk.columnNames.indexOf('projectId') !== -1);
     await queryRunner.dropForeignKey('boards', fkProject as TableForeignKey);
     await queryRunner.dropTable('boards');

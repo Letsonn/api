@@ -1,4 +1,6 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import Boards from "@modules/boards/typeorm/entities/board";
+import Employments from "@modules/employments/typeorm/entities/empĺoyment";
+import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity()
 class Projects {
@@ -9,8 +11,16 @@ class Projects {
   name: string;
 
   @CreateDateColumn()
-  created_at: Date;
+  createdAt: Date;
 
   @UpdateDateColumn()
-  updated_at: Date;
+  updatedAt: Date;
+
+  @OneToMany(() => Employments, employment => employment.project)
+  employments: Employments[];
+
+  @OneToMany(() => Boards, board => board.project)
+  boards: Boards[];
 }
+
+export default Projects;

@@ -1,0 +1,19 @@
+import isAuthenticated from "@shared/http/middlewares/isAuthenticated";
+import { celebrate, Segments } from "celebrate";
+import { Router } from "express";
+import Joi from "joi";
+import BoardsController from "../controllers/BoardsController";
+
+const boardsRouter = Router();
+const boardController = new BoardsController();
+
+boardsRouter.post('/', isAuthenticated, celebrate({
+  [Segments.BODY]: {
+    name: Joi.string().required(),
+    projectId: Joi.string().required(),
+  }
+}),
+  boardController.create
+);
+
+export default boardsRouter;

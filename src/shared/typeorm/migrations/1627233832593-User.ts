@@ -37,8 +37,7 @@ export class User1627233832593 implements MigrationInterface {
           {
             name: 'authenticationToken',
             type: 'varchar',
-            isUnique: true,
-            isNullable: false
+            isNullable: true,
           },
           {
             name: 'createdAt',
