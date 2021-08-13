@@ -6,6 +6,14 @@ import ProjectsController from "../controllers/ProjectsController";
 const projectsRouter = Router();
 const projectController = new ProjectsController();
 
+projectsRouter.get('/:userId', isAuthenticated, celebrate({
+  [Segments.PARAMS]: {
+    userId: Joi.string().required(),
+  },
+}),
+  projectController.list
+);
+
 projectsRouter.post('/', isAuthenticated, celebrate({
   [Segments.BODY]: {
     name: Joi.string().required(),

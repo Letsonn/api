@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import jwtDecode from "jwt-decode";
 import CreateProjectService from "../services/createProjectService";
+import ListProjectsFromUserService from "../services/listProjectsFromUserService";
 
 interface IToken {
   id: string;
@@ -24,5 +25,17 @@ export default class ProjectsController {
 
     response.status(201);
     return response.json(project);
+  }
+
+  public async list(request: Request, response: Response): Promise<Response> {
+    const { userId } = request.params;
+
+    const listProjects = new ListProjectsFromUserService();
+
+    const projects = await listProjects.execute({
+      userId
+    });
+
+    return response.json(projects)
   }
 }
