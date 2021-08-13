@@ -29,7 +29,13 @@ class Employments {
 
   @ManyToOne(() => Projects, project => project.employments)
   @JoinColumn()
-  project: string
+  project: string;
+
+  @Column()
+  userId: string;
+
+  @Column()
+  projectId: string;
 
   @OneToMany(() => Activities, acitivity => acitivity.employment)
   acitivities: Activities[];

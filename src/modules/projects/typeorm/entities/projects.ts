@@ -17,10 +17,10 @@ class Projects {
   updatedAt: Date;
 
   @OneToMany(() => Employments, employment => employment.project)
-  employments: Employments[];
+  employments: Employments;
 
   @OneToMany(() => Boards, board => board.project)
-  boards: Boards[];
+  boards: Boards;
 }
 
 export default Projects;

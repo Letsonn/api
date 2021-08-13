@@ -2,7 +2,7 @@ import AppError from "@shared/errors/AppError";
 import { getCustomRepository } from "typeorm";
 import Employments from "../typeorm/entities/empĺoyment";
 import { Role } from "../typeorm/enum/employmentEnum";
-import { EmploymentsRepository } from "../typeorm/repositories/userRepository";
+import { EmploymentsRepository } from "../typeorm/repositories/employmentsRepository";
 
 interface IRequest {
   role: Role,
@@ -13,7 +13,7 @@ interface IRequest {
 class CreateEmploymentService {
   public async execute({ role, project, user }: IRequest): Promise<Employments> {
     const employmentRepository = getCustomRepository(EmploymentsRepository);
-    const employmentExists = await employmentRepository.findByProjectIdAndUserId(project, user);
+    const employmentExists = await employmentRepository.findByProjectsIdAndUserId(project, user);
 
     if (employmentExists) {
       throw new AppError('Employment alredy exists');
