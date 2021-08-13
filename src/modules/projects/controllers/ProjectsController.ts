@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import jwtDecode from "jwt-decode";
 import CreateProjectService from "../services/createProjectService";
 import ListProjectsFromUserService from "../services/listProjectsFromUserService";
+import UpdateProjectService from "../services/updateProjectService";
 
 interface IToken {
   id: string;
@@ -10,6 +11,21 @@ interface IToken {
 }
 
 export default class ProjectsController {
+  public async update(request: Request, response: Response): Promise<Response> {
+    const { projectId } = request.params;
+    const { name } = request.body;
+
+    const updateProject = new UpdateProjectService();
+
+    const project = await updateProject.execute({
+      id: projectId,
+      name,
+    });
+    console.log(project);
+
+    return response.json(project);
+  }
+
   public async create(request: Request, response: Response): Promise<Response> {
     const { name } = request.body;
     const jwtToken = request.headers.authorization?.split(' ')[1] || '';

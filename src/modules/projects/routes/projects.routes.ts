@@ -14,6 +14,17 @@ projectsRouter.get('/:userId', isAuthenticated, celebrate({
   projectController.list
 );
 
+projectsRouter.patch('/:projectId', isAuthenticated, celebrate({
+  [Segments.PARAMS]: {
+    projectId: Joi.string().required(),
+  },
+  [Segments.BODY]: {
+    name: Joi.string().required(),
+  },
+}),
+  projectController.update
+);
+
 projectsRouter.post('/', isAuthenticated, celebrate({
   [Segments.BODY]: {
     name: Joi.string().required(),
