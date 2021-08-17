@@ -33,4 +33,12 @@ projectsRouter.post('/', isAuthenticated, celebrate({
   projectController.create
 );
 
+projectsRouter.delete('/', isAuthenticated, celebrate({
+  [Segments.BODY]: {
+    projectId: Joi.string().required(),
+  }
+}),
+  projectController.delete
+);
+
 export default projectsRouter;
