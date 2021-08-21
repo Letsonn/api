@@ -6,7 +6,7 @@ import isAuthenticated from '@shared/http/middlewares/isAuthenticated';
 const userRouter = Router();
 const userController = new UserController();
 
-userRouter.get('/', isAuthenticated, userController.list);
+userRouter.get('/', isAuthenticated, userController.listAllUsers);
 
 userRouter.post('/',
   celebrate({
@@ -21,7 +21,9 @@ userRouter.post('/',
   userController.create
 );
 
-userRouter.put('/:id', isAuthenticated, userController.update)
+userRouter.put('/:id', isAuthenticated, userController.update);
+
+userRouter.get('/:userId', isAuthenticated, userController.list);
 
 
 

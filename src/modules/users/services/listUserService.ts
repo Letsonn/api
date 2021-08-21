@@ -1,15 +1,25 @@
-import { getCustomRepository } from 'typeorm';
-import User from '../typeorm/entities/user';
-import { UserRepository } from '../typeorm/repositories/userRepository';
+import AppError from "@shared/errors/AppError";
+import { getCustomRepository } from "typeorm";
+import Users from "../typeorm/entities/user";
+import { UserRepository } from "../typeorm/repositories/userRepository";
+
+interface IRequest {
+  userId: string;
+}
 
 class ListUserService {
-  public async execute(): Promise<User[]> {
+  public async execute({ userId }: IRequest): Promise<Users> {
     const userRepository = getCustomRepository(UserRepository);
 
-    const users = await userRepository.find();
+    const user = await userRepository.findOne(userId);
 
-    return users;
+    if (!user) {
+      throw new AppError('User does not exist', 404);
+    }
+
+    return user;
   }
 }
 
-export default ListUserService
+
+export default ListUserService;
