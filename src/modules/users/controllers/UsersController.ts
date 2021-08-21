@@ -32,7 +32,6 @@ export default class UserController {
     const { id } = request.params;
     const { firstName, lastName } = request.body;
 
-    console.log(id, firstName, lastName)
 
     const updateUser = new UpdateUserService();
 
