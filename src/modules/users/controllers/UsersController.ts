@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import CreateUserService from '../services/createUserService';
 import ListUserService from '../services/listUserService';
+import UpdateUserService from '../services/updateUserService';
 
 export default class UserController {
   public async list(request: Request, response: Response): Promise<Response> {
@@ -22,6 +23,23 @@ export default class UserController {
       email,
       password,
       authenticationToken
+    });
+
+    return response.json(user);
+  }
+
+  public async update(request: Request, response: Response): Promise<Response> {
+    const { id } = request.params;
+    const { firstName, lastName } = request.body;
+
+    console.log(id, firstName, lastName)
+
+    const updateUser = new UpdateUserService();
+
+    const user = await updateUser.execute({
+      id,
+      firstName,
+      lastName,
     });
 
     return response.json(user);
