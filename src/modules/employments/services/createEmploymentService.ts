@@ -25,6 +25,8 @@ class CreateEmploymentService {
     employment.project = project;
     employment.user = user;
 
+    console.log(employment);
+
     await employmentRepository.save(employment);
 
     return employment;
