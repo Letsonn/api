@@ -25,6 +25,8 @@ userRouter.put('/:id', isAuthenticated, userController.update);
 
 userRouter.get('/:userId', isAuthenticated, userController.list);
 
+userRouter.delete('/:userId', isAuthenticated, userController.delete);
+
 
 
 export default userRouter;
