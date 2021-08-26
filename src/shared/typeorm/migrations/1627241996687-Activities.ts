@@ -35,18 +35,18 @@ export class Activities1627241996687 implements MigrationInterface {
       })
     );
 
-    await queryRunner.addColumn('acitivities', new TableColumn({
+    await queryRunner.addColumn('activities', new TableColumn({
       name: "employmentId",
       type: "varchar"
     }));
 
-    await queryRunner.addColumn('acitivities', new TableColumn({
+    await queryRunner.addColumn('activities', new TableColumn({
       name: "boardId",
       type: "varchar"
     }));
 
 
-    await queryRunner.createForeignKey('acitivities', new TableForeignKey({
+    await queryRunner.createForeignKey('activities', new TableForeignKey({
       columnNames: ['boardId'],
       referencedColumnNames: ['id'],
       referencedTableName: 'boards',
@@ -54,7 +54,7 @@ export class Activities1627241996687 implements MigrationInterface {
     }));
 
 
-    await queryRunner.createForeignKey('acitivities', new TableForeignKey({
+    await queryRunner.createForeignKey('activities', new TableForeignKey({
       columnNames: ['employmentId'],
       referencedColumnNames: ['id'],
       referencedTableName: 'employments',
@@ -63,12 +63,12 @@ export class Activities1627241996687 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    const table = await queryRunner.getTable('acitivities');
+    const table = await queryRunner.getTable('activities');
     const fkBoard = table?.foreignKeys.find(fk => fk.columnNames.indexOf('boardId') !== -1);
     const fkEmployment = table?.foreignKeys.find(fk => fk.columnNames.indexOf('employmentId') !== -1);
-    await queryRunner.dropForeignKey('acitivities', fkBoard as TableForeignKey);
-    await queryRunner.dropForeignKey('acitivities', fkEmployment as TableForeignKey);
-    await queryRunner.dropTable('acitivities')
+    await queryRunner.dropForeignKey('activities', fkBoard as TableForeignKey);
+    await queryRunner.dropForeignKey('activities', fkEmployment as TableForeignKey);
+    await queryRunner.dropTable('activities')
   }
 
 }
