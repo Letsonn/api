@@ -7,6 +7,8 @@ import BoardsController from "../controllers/BoardsController";
 const boardsRouter = Router();
 const boardController = new BoardsController();
 
+boardsRouter.get('/:projectId', isAuthenticated, boardController.listBoardFromPorjectId);
+
 boardsRouter.post('/', isAuthenticated, celebrate({
   [Segments.BODY]: {
     name: Joi.string().required(),
