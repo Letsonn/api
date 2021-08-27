@@ -9,5 +9,6 @@ const employmentsController = new EmploymentsController();
 employmentsRouter.get('/:employmentId', isAuthenticated, employmentsController.listOne);
 employmentsRouter.post('/', isAuthenticated, employmentsController.create);
 employmentsRouter.patch('/:employmentId', isAuthenticated, employmentsController.update);
+employmentsRouter.delete('/:employmentId', isAuthenticated, employmentsController.delete);
 
 export default employmentsRouter;
