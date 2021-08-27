@@ -9,7 +9,7 @@ const boardController = new BoardsController();
 
 boardsRouter.get('/:projectId', isAuthenticated, boardController.listBoardFromPorjectId);
 boardsRouter.patch('/:boardId', isAuthenticated, boardController.updateBoard);
-
+boardsRouter.delete('/:boardId', isAuthenticated, boardController.delete);
 boardsRouter.post('/', isAuthenticated, celebrate({
   [Segments.BODY]: {
     name: Joi.string().required(),
