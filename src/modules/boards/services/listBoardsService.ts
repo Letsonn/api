@@ -1,6 +1,5 @@
 import AppError from "@shared/errors/AppError";
 import { getCustomRepository } from "typeorm";
-import { brotliCompress } from "zlib";
 import Boards from "../typeorm/entities/board";
 import { BoardsRepository } from "../typeorm/repositories/boardRepository";
 
