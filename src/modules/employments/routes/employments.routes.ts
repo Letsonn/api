@@ -6,6 +6,7 @@ import isAuthenticated from '@shared/http/middlewares/isAuthenticated';
 const employmentsRouter = Router();
 const employmentsController = new EmploymentsController();
 
+employmentsRouter.get('/:employmentId', isAuthenticated, employmentsController.listOne);
 employmentsRouter.post('/', isAuthenticated, employmentsController.create);
 
 
