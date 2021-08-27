@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import jwtDecode from "jwt-decode";
 import CreateBoardService from "../services/createBoardService";
 import ListBoardsService from "../services/listBoardsService";
+import UpdateBoardService from "../services/updateBoardService";
 
 interface IToken {
   id: string;
@@ -37,5 +38,19 @@ export default class BoardsController {
 
     response.status(201);
     return response.json(project);
+  }
+
+  public async updateBoard(request: Request, response: Response): Promise<Response> {
+    const { boardId } = request.params;
+    const { name } = request.body;
+
+    const updateBoard = new UpdateBoardService();
+
+    const board = await updateBoard.execute({
+      id: boardId,
+      name,
+    });
+
+    return response.json(board);
   }
 }
