@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import CreateEmploymentService from '../services/createEmploymentService';
+import DeleteEmploymentService from '../services/deleteEmploymentService';
 import ListEmploymentService from '../services/listEmploymentService';
 import UpdateEmploymentService from '../services/updateEmploymentService';
 
@@ -43,5 +44,17 @@ export default class EmploymentsController {
     });
 
     return response.json(employment);
+  }
+
+  public async delete(request: Request, response: Response): Promise<Response> {
+    const { employmentId } = request.params;
+
+    const deleteEmployment = new DeleteEmploymentService();
+
+    const deletedEmployment = await deleteEmployment.execute({
+      id: employmentId
+    });
+
+    return response.json(deletedEmployment);
   }
 }
