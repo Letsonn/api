@@ -19,13 +19,11 @@ class CreateEmploymentService {
       throw new AppError('Employment alredy exists');
     }
 
-    const employment = new Employments();
-
-    employment.role = role;
-    employment.project = project;
-    employment.user = user;
-
-    console.log(employment);
+    const employment = employmentRepository.create({
+      role,
+      projectId: project,
+      userId: user
+    });
 
     await employmentRepository.save(employment);
 
