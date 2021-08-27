@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import CreateEmploymentService from '../services/createEmploymentService';
-import ListEmploymentService from '../services/listEmployment';
+import ListEmploymentService from '../services/listEmploymentService';
+import UpdateEmploymentService from '../services/updateEmploymentService';
 
 
 export default class EmploymentsController {
@@ -25,6 +26,20 @@ export default class EmploymentsController {
       role,
       project,
       user
+    });
+
+    return response.json(employment);
+  }
+
+  public async update(request: Request, response: Response): Promise<Response> {
+    const { role } = request.body;
+    const { employmentId } = request.params;
+
+    const updateEmployment = new UpdateEmploymentService();
+
+    const employment = await updateEmployment.execute({
+      id: employmentId,
+      role,
     });
 
     return response.json(employment);
