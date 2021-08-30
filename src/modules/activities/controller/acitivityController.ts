@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import CreateActivityService from "../services/createActivityService";
 import ListActivityService from "../services/listActivityService";
+import UpdateActivityService from "../services/updateActivityService";
 
 export default class ActivityController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -27,6 +28,22 @@ export default class ActivityController {
 
     const activity = await listActivity.execute({
       id: activityId
+    });
+
+    return response.json(activity);
+  }
+
+  public async update(request: Request, response: Response): Promise<Response> {
+    const { id } = request.params;
+    const { description, status, employmentId, boardId } = request.body;
+
+    const updateActivity = new UpdateActivityService();
+    const activity = await updateActivity.execute({
+      id,
+      description,
+      status,
+      employmentId,
+      boardId
     });
 
     return response.json(activity);

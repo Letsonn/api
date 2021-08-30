@@ -19,5 +19,6 @@ activityRouter.post('/', isAuthenticated, celebrate({
 );
 
 activityRouter.get('/:activityId', isAuthenticated, activityController.list);
+activityRouter.put('/:activityId', isAuthenticated, activityController.update);
 
 export default activityRouter;
