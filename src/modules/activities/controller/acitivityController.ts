@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import CreateActivityService from "../services/createActivityService";
+import DeleteActivityService from "../services/deleteActivityService";
 import ListActivityService from "../services/listActivityService";
 import UpdateActivityService from "../services/updateActivityService";
 
@@ -47,5 +48,16 @@ export default class ActivityController {
     });
 
     return response.json(activity);
+  }
+
+  public async delete(request: Request, response: Response): Promise<Response> {
+    const { id } = request.params;
+
+    const deleteActivity = new DeleteActivityService();
+    const deletedActivity = await deleteActivity.execute({
+      id,
+    });
+
+    return response.json(deletedActivity);
   }
 }
