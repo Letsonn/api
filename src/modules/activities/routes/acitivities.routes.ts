@@ -21,5 +21,6 @@ activityRouter.post('/', isAuthenticated, celebrate({
 activityRouter.get('/:activityId', isAuthenticated, activityController.list);
 activityRouter.put('/:activityId', isAuthenticated, activityController.update);
 activityRouter.delete('/:activityId', isAuthenticated, activityController.delete);
+activityRouter.get('/:boardId/board', isAuthenticated, activityController.listActivitiesFromBoard);
 
 export default activityRouter;

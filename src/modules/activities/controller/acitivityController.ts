@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import CreateActivityService from "../services/createActivityService";
 import DeleteActivityService from "../services/deleteActivityService";
+import ListActivitiesFromBoard from "../services/listActivitiesBoard";
 import ListActivityService from "../services/listActivityService";
 import UpdateActivityService from "../services/updateActivityService";
 
@@ -59,5 +60,17 @@ export default class ActivityController {
     });
 
     return response.json(deletedActivity);
+  }
+
+  public async listActivitiesFromBoard(request: Request, response: Response): Promise<Response> {
+    const { boardId } = request.params;
+
+    const listActivities = new ListActivitiesFromBoard();
+    const getActivities = await listActivities.execute({
+      boardId
+    });
+    console.log(getActivities);
+
+    return response.json(getActivities);
   }
 }

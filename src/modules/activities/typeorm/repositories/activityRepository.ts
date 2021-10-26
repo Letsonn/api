@@ -12,4 +12,14 @@ export class ActivitiesRepository extends Repository<Activities> {
 
     return activity;
   }
+
+  public async findByBoardId(boardId: string) {
+    const activities = await this.find({
+      where: {
+        board: boardId
+      }
+    });
+
+    return activities;
+  }
 }
