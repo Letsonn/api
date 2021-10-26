@@ -13,6 +13,9 @@ class ListBoardsService {
     const boards = await boardRepository.find({
       where: {
         project: projectId
+      },
+      order: {
+        createdAt: "ASC",
       }
     });
 
