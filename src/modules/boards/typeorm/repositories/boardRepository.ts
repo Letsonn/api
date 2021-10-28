@@ -26,7 +26,7 @@ export class BoardsRepository extends Repository<Boards> {
 
   public async findBoardInfo(id: string) {
     const board = await this.query(`
-    select * from boards b
+    select *, b.name from boards b
     inner join projects p on p.id = b.projectId
     where b.id = "${id}";
     `);
