@@ -7,6 +7,7 @@ import BoardsController from "../controllers/BoardsController";
 const boardsRouter = Router();
 const boardController = new BoardsController();
 
+boardsRouter.get('/:boardId/unique', isAuthenticated, boardController.listBoard);
 boardsRouter.get('/:projectId', isAuthenticated, boardController.listBoardFromPorjectId);
 boardsRouter.patch('/:boardId', isAuthenticated, boardController.updateBoard);
 boardsRouter.delete('/:boardId', isAuthenticated, boardController.delete);

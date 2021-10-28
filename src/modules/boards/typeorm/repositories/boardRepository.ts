@@ -23,4 +23,14 @@ export class BoardsRepository extends Repository<Boards> {
 
     return board;
   }
+
+  public async findBoardInfo(id: string) {
+    const board = await this.query(`
+    select * from boards b
+    inner join projects p on p.id = b.projectId
+    where b.id = "${id}";
+    `);
+
+    return board;
+  }
 }

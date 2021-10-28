@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import jwtDecode from "jwt-decode";
 import CreateBoardService from "../services/createBoardService";
 import DeleteBoardService from "../services/deleteBoardService";
+import ListBoard from "../services/listBoard";
 import ListBoardsService from "../services/listBoardsService";
 import UpdateBoardService from "../services/updateBoardService";
 
@@ -12,6 +13,18 @@ interface IToken {
 }
 
 export default class BoardsController {
+  public async listBoard(request: Request, response: Response): Promise<Response> {
+    const { boardId } = request.params;
+
+    const listBoard = new ListBoard();
+
+    const board = await listBoard.execute({
+      boardId
+    });
+
+    return response.json(board);
+  }
+
   public async listBoardFromPorjectId(request: Request, response: Response): Promise<Response> {
     const { projectId } = request.params;
 
