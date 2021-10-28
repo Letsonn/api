@@ -13,4 +13,14 @@ export class EmploymentsRepository extends Repository<Employments> {
 
     return employment;
   }
+
+  public async listEmploymentsProject(projectId: string) {
+    const employments = await this.query(`
+    select e.* from employments e
+    join projects p on p.id = e.projectId
+    where e.projectId = "${projectId}";
+    `);
+
+    return employments;
+  }
 }

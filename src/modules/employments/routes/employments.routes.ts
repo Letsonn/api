@@ -7,6 +7,7 @@ const employmentsRouter = Router();
 const employmentsController = new EmploymentsController();
 
 employmentsRouter.get('/:employmentId', isAuthenticated, employmentsController.listOne);
+employmentsRouter.get('/:projectId/employments-project',isAuthenticated, employmentsController.listEmploymentsProject)
 employmentsRouter.post('/', isAuthenticated, employmentsController.create);
 employmentsRouter.patch('/:employmentId', isAuthenticated, employmentsController.update);
 employmentsRouter.delete('/:employmentId', isAuthenticated, employmentsController.delete);

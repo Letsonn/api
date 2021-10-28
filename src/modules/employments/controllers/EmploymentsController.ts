@@ -3,7 +3,7 @@ import CreateEmploymentService from '../services/createEmploymentService';
 import DeleteEmploymentService from '../services/deleteEmploymentService';
 import ListEmploymentService from '../services/listEmploymentService';
 import UpdateEmploymentService from '../services/updateEmploymentService';
-
+import ListEmploymentsProjectService from '../services/listEmploymentsProjectService';
 
 export default class EmploymentsController {
   public async listOne(request: Request, response: Response): Promise<Response> {
@@ -30,6 +30,18 @@ export default class EmploymentsController {
     });
 
     return response.json(employment);
+  }
+
+  public async listEmploymentsProject(request: Request, response: Response): Promise<Response> {
+    const {projectId} = request.params;
+
+    const listEmploymentsProject = new ListEmploymentsProjectService();
+
+    const employments = await listEmploymentsProject.execute({
+      projectId
+    });
+
+    return response.json(employments);
   }
 
   public async update(request: Request, response: Response): Promise<Response> {
