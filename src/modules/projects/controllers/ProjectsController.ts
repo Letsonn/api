@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import jwtDecode from "jwt-decode";
 import CreateProjectService from "../services/createProjectService";
 import DeleteProjectService from "../services/deleteProject";
+import ListProject from "../services/listProject";
 import ListProjectsFromUserService from "../services/listProjectsFromUserService";
 import UpdateProjectService from "../services/updateProjectService";
 
@@ -56,7 +57,7 @@ export default class ProjectsController {
     return response.json(projects)
   }
 
-  public async delete(request: Request, response: Response) {
+  public async delete(request: Request, response: Response): Promise<Response> {
     const { projectId } = request.body;
 
     const deleteProject = new DeleteProjectService();
@@ -64,5 +65,17 @@ export default class ProjectsController {
     const deletedProject = await deleteProject.execute(projectId);
 
     return response.json(deletedProject);
+  }
+
+  public async listProjectId(request: Request, response: Response): Promise<Response> {
+    const { projectId } = request.params;
+
+    const listProject = new ListProject();
+
+    const project = await listProject.execute({
+      id: projectId
+    });
+
+    return response.json(project);
   }
 }

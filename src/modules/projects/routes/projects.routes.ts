@@ -41,4 +41,12 @@ projectsRouter.delete('/', isAuthenticated, celebrate({
   projectController.delete
 );
 
+projectsRouter.get('/:projectId/unique', isAuthenticated, celebrate({
+  [Segments.BODY]: {
+    projectId: Joi.string().required(),
+  }
+}),
+  projectController.listProjectId
+)
+
 export default projectsRouter;
