@@ -4,11 +4,9 @@ import Activities from "../entities/activity";
 @EntityRepository(Activities)
 export class ActivitiesRepository extends Repository<Activities> {
   public async findById(id: string) {
-    const activity = await this.findOne({
-      where: {
-        id
-      }
-    });
+    const activity = await this.query(`
+    select *  from activities where id = "${id}";
+    `);
 
     return activity;
   }

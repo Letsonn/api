@@ -11,7 +11,7 @@ class ListActivityService {
   public async execute({ id }: IRequest): Promise<Activities> {
     const activityRepository = getCustomRepository(ActivitiesRepository);
 
-    const activity = await activityRepository.findOne(id);
+    const activity = await activityRepository.findById(id);
 
     if (!activity) {
       throw new AppError('Activity does not exist');
