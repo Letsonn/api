@@ -6,7 +6,9 @@ class ListUsersService {
   public async execute(): Promise<User[]> {
     const userRepository = getCustomRepository(UserRepository);
 
-    const users = await userRepository.find();
+    const users = await userRepository.find({
+      select: ['id', 'firstName', 'lastName', 'email', 'createdAt', 'updatedAt']
+    });
 
     return users;
   }
