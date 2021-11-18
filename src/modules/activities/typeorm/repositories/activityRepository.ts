@@ -15,7 +15,8 @@ export class ActivitiesRepository extends Repository<Activities> {
     const activities = await this.find({
       where: {
         board: boardId
-      }
+      },
+      select: ['id', 'status', 'employment', 'description', 'board', 'createdAt', 'updatedAt']
     });
 
     return activities;
